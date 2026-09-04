@@ -6,12 +6,7 @@ nub' :: Eq a => [a] -> [a]
 nub' = toList . fromList
 
 
-bfs :: Ord a =>
-    (a -> [a]) ->
-    (a -> s -> s) ->
-    [a] ->
-    (Set a, s) ->
-    (Set a, s)
+bfs :: Ord a => (a -> [a]) -> (a -> s -> s) -> [a] -> (Set a, s) -> (Set a, s)
 bfs neighbors whenVisit frontiers (visited, state)
     | null frontiers = (visited, state)
     | otherwise =

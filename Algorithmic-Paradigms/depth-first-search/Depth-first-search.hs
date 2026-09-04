@@ -2,13 +2,7 @@ import Data.Set (Set, member, insert)
 import Data.List (foldl')
 
 
-dfs :: Ord a =>
-    (a -> [a]) ->
-    (a -> s -> s) ->
-    (a -> s -> s) ->
-    a ->
-    (Set a, s) ->
-    (Set a, s)
+dfs :: Ord a => (a -> [a]) -> (a -> s -> s) -> (a -> s -> s) -> a -> (Set a, s) -> (Set a, s)
 dfs neighbors preVisit postVisit node (visited, state)
     | member node visited = (visited, state)
     | otherwise =
