@@ -15,4 +15,4 @@ dfs neighbors preVisit postVisit node (visited, state)
         let visited'             = insert node visited
             state'               = preVisit node state
             (visited'', state'') = foldl' (\acc n -> dfs neighbors preVisit postVisit n acc) (visited', state') (neighbors node)
-        in (visited'', state'')
+        in (visited'', postVisit node state'')
