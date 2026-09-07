@@ -1,0 +1,66 @@
+dijkstra
+bellman ford
+floyd warshall
+union find
+fenwick tree
+trie
+serpent algorithm
+twofish algorithm
+ahu algorithm
+newton method
+gradient descent
+elgamal algorithm
+simulated annealing
+rijndael algorithm (AES)
+dancing link
+backpropagation
+boids
+graham scan
+cellular automata
+main lorentz algorithm
+counterfactual regret minimization
+argon2
+RNN
+kmp algorithm
+monotone chain algorithm
+MARS (used to be one of the cadidate of AES)
+RC6
+A*
+simulated annealing
+garsia wachs algorithm
+tabu search
+transformer
+PPO
+GNN
+GRPO
+genetic algorithm
+IDA*
+lenstra lenstra lovász
+rabin karp algorithm
+particle swarm optimization
+ant colony optimization
+AA tree
+scapegoat tree
+k dimension tree
+kinetic tournament tree
+skip list
+B tree
+li chao tree
+cartesian tree
+splay tree
+cat tree
+keccak256
+monotonic queue
+monotonic stack
+treap
+dividing tree
+weight balanced leafy tree
+artificial bee colony
+RSA
+SNN
+elliptic curve cryptography (ECC)
+MD5
+fast fourier transform
+merkle hellman knapsack cryptosystem
+mersenne Twister
+cha cha 20

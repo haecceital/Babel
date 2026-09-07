@@ -31,7 +31,7 @@ private:
         build(l, mid, cur * 2 + 1, data);
         build(mid + 1, r, cur * 2 + 2, data);
 
-        tree_[cur] = merge(tree_[cur * 2 + 1], tree_[cur * 2 + 2]);
+        tree_[cur] = merge_(tree_[cur * 2 + 1], tree_[cur * 2 + 2]);
     }
 
     T query_(size_t start, size_t end, size_t l, size_t r, size_t p) {
@@ -49,7 +49,7 @@ private:
         );
     }
 
-    void update_(size_t start, size_t end, size_t l, size_t r, size_t p, T new_val) {
+    void update_(size_t start, size_t end, size_t l, size_t r, size_t p, LazyType new_val) {
         push_down(l, r, p);
 
         if (r < start || l > end) return;
@@ -75,10 +75,10 @@ private:
         size_t mid = l + (r - l) / 2;
 
         lazy_[p * 2 + 1] = merge_(lazy_[p * 2 + 1], lazy_[p]);
-        tree_[p * 2 + 1] = apply_lazy_(tree_[p * 2 + 1], mid - l + 1, p);
+        tree_[p * 2 + 1] = apply_lazy_(tree_[p * 2 + 1], lazy_[p], mid - l + 1);
 
         lazy_[p * 2 + 2] = merge_(lazy_[p * 2 + 2], lazy_[p]);
-        tree_[p * 2 + 2] = apply_lazy_(tree_[p * 2 + 2], r - mid, p);
+        tree_[p * 2 + 2] = apply_lazy_(tree_[p * 2 + 2], lazy_[p], r - mid);
 
         lazy_[p] = id_lazy_;
     }

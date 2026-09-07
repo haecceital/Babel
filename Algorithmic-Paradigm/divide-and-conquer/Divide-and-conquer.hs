@@ -11,8 +11,8 @@ mergeSort :: Ord a => [a] -> [a]
 mergeSort list = dac divide merge isBase solve list
     where
         divide :: [a] -> [[a]]
-        divide xs = [fst t, snd t]
-            where t = splitAt (length xs `div` 2) xs
+        divide xs = [left, right]
+            where (left, right) = splitAt (length xs `div` 2) xs
 
         merge :: Ord a => [[a]] -> [a]
         merge [left, right] = mergeHelper left right

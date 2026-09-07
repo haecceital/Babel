@@ -1,4 +1,4 @@
-# this was made for another project, so it has some unrelated part (like cosine annealing)
+# this was made for a school project, so it has some unrelated parts (like cosine annealing)
 
 import numpy as np
 
@@ -8,8 +8,9 @@ EPS = 1E-8
 DECAY_RATE = 0.9
 LR_MAX = 0.01
 LR_MIN = 1E-6
+TOTAL_EPOCHS = 100
 
-sliding_window_view = numpy.lib.stride_tricks.sliding_window_view
+sliding_window_view = np.lib.stride_tricks.sliding_window_view
 
 # cosine annealing
 def get_cosine_lr(epoch: int):
@@ -306,26 +307,26 @@ def forward(self, data: np.ndarray) -> np.ndarray:
     
         return output
 
-    def backward(self, d_out: np.ndarray, learning_rate: float = None) -> np.ndarray:
-        d_input = np.zeros_like(self.cache["data_shape"])
+def backward(self, d_out: np.ndarray, learning_rate: float = None) -> np.ndarray:
+    d_input = np.zeros_like(self.cache["data_shape"])
 
-        channels, out_h, out_w = d_out.shape
-        pool_h, pool_w = self.pool_size
+    channels, out_h, out_w = d_out.shape
+    pool_h, pool_w = self.pool_size
 
-        for c in range(channels):
-            for y in range(out_h):
-                for x in range(out_w):
-                    h_start = y * self.stride
-                    h_end = h_start + pool_h
-                    w_start = x * self.stride
-                    w_end = w_start + pool_w
+    for c in range(channels):
+        for y in range(out_h):
+            for x in range(out_w):
+                h_start = y * self.stride
+                h_end = h_start + pool_h
+                w_start = x * self.stride
+                w_end = w_start + pool_w
 
-                    window = self.cache[c, h_start:h_end, w_start:w_end]
-                    max_y, max_x = np.unravel_index(np.argmax(window), self.pool_size)
+                window = self.cache[c, h_start:h_end, w_start:w_end]
+                max_y, max_x = np.unravel_index(np.argmax(window), self.pool_size)
 
-                    d_input[c, h_start + max_y, w_start + max_x] = d_out[c, y, x]
+                d_input[c, h_start + max_y, w_start + max_x] = d_out[c, y, x]
 
-        return d_input
+    return d_input
 
 
 class Flatten:

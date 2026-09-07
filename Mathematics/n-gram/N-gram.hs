@@ -1,4 +1,5 @@
--- this is unfinished
+-- unfinished
+-- this was made for a class presentation, but it eventually wasnt used
 
 import qualified Data.Map as Map
 import Data.List (foldl')
