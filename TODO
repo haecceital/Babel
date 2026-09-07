@@ -9,11 +9,14 @@ twofish algorithm
 ahu algorithm
 newton method
 gradient descent
+Björklund algorithm
 elgamal algorithm
-simulated annealing
+Kruskal's algorithm
 rijndael algorithm (AES)
+Tarjan algorithm
 dancing link
 backpropagation
+Kahn's Algorithm
 boids
 graham scan
 cellular automata
@@ -32,6 +35,7 @@ tabu search
 transformer
 PPO
 GNN
+LK-Heuristic
 GRPO
 genetic algorithm
 IDA*
@@ -46,6 +50,7 @@ kinetic tournament tree
 skip list
 B tree
 li chao tree
+Held-Karp algorithm
 cartesian tree
 splay tree
 cat tree

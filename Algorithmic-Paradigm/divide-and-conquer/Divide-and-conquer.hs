@@ -18,10 +18,11 @@ mergeSort list = dac divide merge isBase solve list
         merge [left, right] = mergeHelper left right
             where
                 mergeHelper :: Ord a => [a] -> [a] -> [a]
-                mergeHelper [] []         = []
-                mergeHelper [] (y:ys)     = y : mergeHelper [] ys
-                mergeHelper (x:xs) []     = x : mergeHelper xs []
-                mergeHelper (x:xs) (y:ys) = if x < y then x : mergeHelper xs (y:ys) else y : mergeHelper (x:xs) ys
+                mergeHelper xs []         = xs
+                mergeHelper [] ys         = ys
+                mergeHelper (x:xs) (y:ys)
+                    | x < y    = x : mergeHelper xs (y:ys)
+                    |otherwise = y : mergeHelper (x:xs) ys
 
         isBase :: [a] -> Bool
         isBase [_] = True
