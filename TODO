@@ -1,4 +1,3 @@
-dijkstra
 bellman ford
 floyd warshall
 union find
@@ -11,12 +10,17 @@ newton method
 gradient descent
 Björklund algorithm
 elgamal algorithm
-Kruskal's algorithm
+shell sort
+heap sort
+radix sort
+circle sort
+tim sort
+intro sort
+bucket sort
 rijndael algorithm (AES)
 Tarjan algorithm
 dancing link
 backpropagation
-Kahn's Algorithm
 boids
 graham scan
 cellular automata
@@ -54,18 +58,24 @@ Held-Karp algorithm
 cartesian tree
 splay tree
 cat tree
+virtual tree
 keccak256
 monotonic queue
+floyd-warshall
 monotonic stack
+link-cut tree
 treap
 dividing tree
 weight balanced leafy tree
 artificial bee colony
+heavy-light decomposition
+long-chain decomposition
+preferred-path decomposition
 RSA
 SNN
 elliptic curve cryptography (ECC)
 MD5
 fast fourier transform
 merkle hellman knapsack cryptosystem
-mersenne Twister
+mersenne twister
 cha cha 20

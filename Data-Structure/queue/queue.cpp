@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstddef>
-#include "../deque/deque.cpp" // /Data-Structure/deque/deque.cpp
+#include "../deque/deque.hpp" // /Data-Structure/deque/deque.cpp
 
 
 template <typename T>

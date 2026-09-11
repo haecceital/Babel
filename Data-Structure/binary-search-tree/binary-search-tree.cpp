@@ -14,14 +14,15 @@ private:
 
     struct Node {
         T val;
+        size_t count = 0;
         size_t left = null_idx;
         size_t right = null_idx;
     };
 
     std::vector<Node> tree_;
     std::vector<size_t> free_slots_;
-    size_t root_ = null_idx;
     Compare compare_;
+    size_t root_ = null_idx;
 
     size_t alloc_node() {
         if (!free_slots_.empty()) {
@@ -50,7 +51,7 @@ private:
         return mid;
     }
 
-    size_t find_closest(T val, bool return_parent) {
+    size_t find_closest(T val, bool return_parent = false) {
         if (root_ == null_idx) return null_idx;
 
         size_t idx = root_, parent_idx = null_idx;
@@ -69,34 +70,44 @@ private:
         return return_parent ? parent_idx : idx;
     }
 
+    bool equal(T a, T b) { return !compare_(a, b) && !compare_(b, a); }
+
 public:
     template <typename InputIt>
     BinarySearchTree(InputIt first, InputIt last, Compare compare = Compare()) : compare_(compare) {
-        size_t size = std::distance(first, last);
-        if (size == 0) return;
+        std::vector<T> temp(first, last);
+        if (temp.empty()) return;
 
-        tree_.resize(size);
-        size_t idx = 0;
-        for (auto it = first; it != last; ++it) {
-            tree_[idx++].val = *it;
+        tree_.resize(temp.size());
+
+        size_t write_idx = 0;
+        tree_[0].val = temp[0];
+        tree_[0].count = 1;
+        for (size_t read_idx = 1; read_idx < temp.size(); ++read_idx) {
+            if (equal(temp[read_idx], tree_[write_idx].val);) {
+                tree_[write_idx].count++;
+            } else {
+                write_idx++;
+                tree_[write_idx].val = temp[read_idx];
+                tree_[write_idx].count = 1;
+            }
         }
 
-        std::sort(tree_.begin(), tree_.end(), [&](const Node& a, const Node& b) {
-            return compare(a.val, b.val);
-        });
+        size_t unique_size = write_idx + 1;
+        tree_.resize(unique_size);
 
-        root_ = build(0, size - 1);
+        root_ = build(0, unique_size - 1);
     }
 
     bool contain(T val) {
-        size_t idx = find_closest(val, false);
+        size_t idx = find_closest(val);
         if (idx == null_idx) return false;
 
         return (val == tree_[idx].val) ? true : false;
     }
 
     void insert(T val) {
-        size_t idx = find_closest(val, false);
+        size_t idx = find_closest(val);
 
         if (idx != null_idx && tree_[idx].val == val) return;
 
@@ -108,30 +119,63 @@ public:
         else tree_[idx].right = new_idx;
     }
 
-    void remove(T val) {
-        size_t idx = find_closest(val, true);
+    void remove(T val, size_t cnt = 1) {
+        if (!contain(val)) return;
 
-        if (idx == null_idx) {
-            if (root_ != null_idx && tree_[root_].val == val && tree_.size() == 1) {
-                free_node(root_);
-                root_ = null_idx;
-            }
+        size_t parent_idx = find_closest(val, true);
+        size_t idx = null_idx;
+        bool is_left_child = false;
 
+        if (parent_idx == null_idx) idx = root_;
+        else if (tree_[parent_idx].left != null_idx && equal(val, tree_[tree_[parent_idx].left].val)) {
+            idx = tree_[parent_idx].left;
+            is_left_child = true;
+        } else {
+            idx = tree_[parent_idx].right;
+            is_left_child = false;
+        }
+
+        if (tree_[idx].count > cnt) {
+            tree_[idx].count -= cnt;
             return;
         }
 
-        bool left = !compare_(val, tree_[ tree_[idx].left ].val) && !compare_(tree_[ tree_[idx].left ].val, val);
-        bool right = !compare_(val, tree_[ tree_[idx].right ].val) && !compare_(tree_[ tree_[idx].right ].val, val);
+        size_t child_cnt = (tree_[idx].left != null_idx) + (tree_[idx].right != null_idx);
 
-        if (!left && !right) return;
+        auto attach_to_parent = [&](size_t new_child) {
+            if (parent_idx == null_idx) root_ = new_child;
+            else if (is_left_child)  tree_[parent_idx].left = new_child;
+            else tree_[parent_idx].right = new_child;
+        };
 
-        size_t min, max;
-        if (left) {
-
+        if (child_cnt == 0) {
+            attach_to_parent(null_idx);
+            free_node(idx);
+        } else if (child_cnt == 1) {
+            size_t only_child = (tree_[idx].left != null_idx) ? tree_[idx].left : tree_[idx].right;
+            attach_to_parent(only_child);
+            free_node(idx);
         } else {
+            size_t succ_parent = idx;
+            size_t succ = tree_[idx].right;
 
+            while (tree_[succ].left != null_idx) {
+                succ_parent = succ;
+                succ = tree_[succ].left;
+            }
+
+            tree_[idx].val = tree_[succ].val;
+            tree_[idx].count = tree_[succ].count;
+
+            size_t succ_child = tree_[succ].right;
+            if (succ_parent == idx) {
+                tree_[succ_parent].right = succ_child;
+            } else {
+                tree_[succ_parent].left = succ_child;
+            }
+
+            free_node(succ);
         }
-
     }
 
     T find_max() {
@@ -140,7 +184,7 @@ public:
         size_t idx = root_;
         while (tree_[idx].right != null_idx) idx = tree_[idx].right;
 
-        return tree_[idx].val
+        return tree_[idx].val;
     }
 
     T find_min() {
@@ -149,6 +193,6 @@ public:
         size_t idx = root_;
         while (tree_[idx].left != null_idx) idx = tree_[idx].left;
 
-        return tree_[idx].val
+        return tree_[idx].val;
     }
 };
