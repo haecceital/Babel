@@ -1,7 +1,3 @@
-bellman ford
-floyd warshall
-union find
-fenwick tree
 trie
 serpent algorithm
 twofish algorithm
@@ -15,6 +11,8 @@ heap sort
 radix sort
 circle sort
 tim sort
+bitonic sort
+cycle sort
 intro sort
 bucket sort
 rijndael algorithm (AES)
@@ -28,9 +26,9 @@ main lorentz algorithm
 counterfactual regret minimization
 argon2
 RNN
-kmp algorithm
 monotone chain algorithm
 MARS (used to be one of the cadidate of AES)
+gift wrapping algorithm
 RC6
 A*
 simulated annealing
@@ -47,6 +45,7 @@ lenstra lenstra lovász
 rabin karp algorithm
 particle swarm optimization
 ant colony optimization
+reservoir sampling
 AA tree
 scapegoat tree
 k dimension tree
@@ -60,13 +59,14 @@ splay tree
 cat tree
 virtual tree
 keccak256
-monotonic queue
-floyd-warshall
-monotonic stack
 link-cut tree
 treap
 dividing tree
 weight balanced leafy tree
+Boyer-Moore-Horspool algorithm
+avl tree
+red black tree
+hash table
 artificial bee colony
 heavy-light decomposition
 long-chain decomposition
@@ -79,3 +79,6 @@ fast fourier transform
 merkle hellman knapsack cryptosystem
 mersenne twister
 cha cha 20
+
+
+fix segment tree

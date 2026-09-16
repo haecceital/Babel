@@ -1,4 +1,4 @@
-#pragma once
+#pragma once // fenwick tree
 
 #include <cstddef>
 #include <vector>
@@ -7,13 +7,13 @@
 #define lowbit(x) ((x) & -(x))
 
 
-template<typename T, typename Merge, typename UnMerge>
+template<typename T, typename Merge, typename Unmerge>
 class BinaryIndexTree {
 private:
     size_t size_;
     std::vector<T> tree_;
     Merge merge_;
-    UnMerge unmerge_;
+    Unmerge unmerge_;
 
     void build(const T *data) {
         for(size_t i = 0; i < size_; ++i) tree_[i] = data[i];
@@ -42,7 +42,7 @@ private:
 
 public:
     template <typename InputIt>
-    BinaryIndexTree(InputIt first, InputIt last, Merge merge = Merge(), UnMerge unmerge = UnMerge()) : merge_(merge), unmerge_(unmerge) {
+    BinaryIndexTree(InputIt first, InputIt last, Merge merge = Merge(), Unmerge unmerge = Unmerge()) : merge_(merge), unmerge_(unmerge) {
         size_ = std::distance(first, last);
         if (size_ == 0) return;
 

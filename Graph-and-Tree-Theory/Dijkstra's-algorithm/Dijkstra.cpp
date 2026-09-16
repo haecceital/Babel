@@ -8,6 +8,7 @@
 #include "../../Data-Structure/heap/heap.hpp" // Data-Structure/heap/heap.cpp
 
 
+// u <-> v
 struct Edge { size_t u, v; long long weight; };
 
 struct HalfEdge { size_t node; long long weight; };
@@ -18,7 +19,7 @@ struct Compare {
     }
 };
 
-// n is the numbers of node
+// n is the number of node
 std::optional<long long> Dijkstra(size_t n, size_t start, size_t end, std::vector<Edge> edges) {
     std::vector<std::vector<HalfEdge>> adjacency_list(n);
     for(const Edge &e : edges) {
@@ -39,7 +40,7 @@ std::optional<long long> Dijkstra(size_t n, size_t start, size_t end, std::vecto
         if (visited[cur.node]) continue;
         visited[cur.node] = true;
 
-        for (const HalfEdge &e : adjacency_list[cur.node]) {
+        for(const HalfEdge &e : adjacency_list[cur.node]) {
             long long new_dist = dist[cur.node] + e.weight;
             if (new_dist < dist[e.node]) {
                 dist[e.node] = new_dist;

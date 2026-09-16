@@ -41,7 +41,7 @@ private:
     }
 
 public:
-    heap(Compare compare = Compare()) : comp_(compare) {}
+    explicit heap(Compare compare = Compare()) : comp_(compare) {}
 
     void push(T val) {
         mem_pool_.push_back(val);

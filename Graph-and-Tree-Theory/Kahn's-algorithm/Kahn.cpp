@@ -8,8 +8,8 @@
 // u -> v, directed
 struct Edge { size_t u, v; };
 
-// n is the numbers of node
-std::vector<size_t> KahnsAlgorithm(size_t n, std::vector<Edge> edges) {
+// n is the number of node
+std::vector<size_t> Kahn(size_t n, std::vector<Edge> edges) {
     std::vector<size_t> in_degree(n), answer;
     std::vector<std::vector<size_t>> adjacency_list(n);
     queue<size_t> q;

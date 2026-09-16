@@ -13,7 +13,7 @@ private:
     std::vector<Node> tree_;
 
 public:
-    DisjointSetUnion(int length) {
+    explicit DisjointSetUnion(int length) {
         tree_.resize(length);
         for(int i = 0; i < length; ++i) {
             tree_[i].parent = i;

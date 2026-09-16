@@ -6,6 +6,7 @@
 #include "../../Data-Structure/disjoint-set-union/disjoint-set-union.hpp" // Data-Structure/disjoint-set-union/disjoint-set-union.cpp
 
 
+// u <-> v
 struct Edge { size_t u, v; long long weight; };
 
 struct MSTResult {
@@ -13,8 +14,8 @@ struct MSTResult {
     std::vector<Edge> edges;
 };
 
-// n is the numbers of node
-MSTResult KruskalsAlgorithm(size_t n, std::vector<Edge> edges) {
+// n is the number of node
+MSTResult Kruskal(size_t n, std::vector<Edge> edges) {
     std::sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) -> bool {
         return a.weight < b.weight;
     });

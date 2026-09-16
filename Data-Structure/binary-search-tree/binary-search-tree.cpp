@@ -75,20 +75,20 @@ private:
 public:
     template <typename InputIt>
     BinarySearchTree(InputIt first, InputIt last, Compare compare = Compare()) : compare_(compare) {
-        std::vector<T> temp(first, last);
-        if (temp.empty()) return;
+        std::vector<T> tmp(first, last);
+        if (tmp.empty()) return;
 
-        tree_.resize(temp.size());
+        tree_.resize(tmp.size());
 
         size_t write_idx = 0;
-        tree_[0].val = temp[0];
+        tree_[0].val = tmp[0];
         tree_[0].count = 1;
-        for (size_t read_idx = 1; read_idx < temp.size(); ++read_idx) {
-            if (equal(temp[read_idx], tree_[write_idx].val);) {
+        for (size_t read_idx = 1; read_idx < tmp.size(); ++read_idx) {
+            if (equal(tmp[read_idx], tree_[write_idx].val);) {
                 tree_[write_idx].count++;
             } else {
                 write_idx++;
-                tree_[write_idx].val = temp[read_idx];
+                tree_[write_idx].val = tmp[read_idx];
                 tree_[write_idx].count = 1;
             }
         }
