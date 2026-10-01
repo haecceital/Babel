@@ -16,11 +16,13 @@ cycle sort
 intro sort
 bucket sort
 rijndael algorithm (AES)
+pollard's rho algorithm
 Tarjan algorithm
 dancing link
 backpropagation
 boids
 graham scan
+wave function collapse
 cellular automata
 main lorentz algorithm
 counterfactual regret minimization
@@ -42,7 +44,6 @@ GRPO
 genetic algorithm
 IDA*
 lenstra lenstra lovász
-rabin karp algorithm
 particle swarm optimization
 ant colony optimization
 reservoir sampling
@@ -79,6 +80,6 @@ fast fourier transform
 merkle hellman knapsack cryptosystem
 mersenne twister
 cha cha 20
-
+chudnovsky algorithm
 
 fix segment tree
