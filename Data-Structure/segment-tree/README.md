@@ -29,7 +29,7 @@
 $$
 \begin{aligned}
 & 1. \ h(h(old\_v, v_1, L), v_2, L) = h(old\_v, g(v_1, v_2), L) \\
-& 2. \ h(f(old\_v_1, old\_v_2), v, L_1 + L_2) = f(h(old\_v_1, v, L_1), h(old\_v_2, v, L_2))
+& 2. \ h(f(old\_v_{1}, old\_v_{2}), v, L_1 + L_2) = f(h(old\_v_{1}, v, L_1), h(old\_v_{2}, v, L_2))
 \end{aligned}
 $$
 
