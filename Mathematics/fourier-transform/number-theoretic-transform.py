@@ -23,7 +23,7 @@ def find_primitive_root(p: int) -> int:
     return -1
     
 
-def ntt(xs: list, p: int, g: int = -1) -> list:
+def ntt(xs: list[int], p: int, g: int = -1) -> list[int]:
     if g == -1: g = find_primitive_root(p)
     N = len(xs)
     
@@ -48,7 +48,7 @@ def ntt(xs: list, p: int, g: int = -1) -> list:
     return combined
 
 
-def intt(A: list, p: int, g: int = -1) -> list:
+def intt(A: list[int], p: int, g: int = -1) -> list[int]:
     if g == -1:  g = find_primitive_root(p)
         
     N = len(A)
@@ -58,3 +58,7 @@ def intt(A: list, p: int, g: int = -1) -> list:
     
     N_inv = pow(N, p - 2, p)
     return [(x * N_inv) % p for x in res]
+
+
+def multiplypoly(xs: list[int], ys: list[int]) -> list[int]:
+    pass

@@ -4,6 +4,7 @@ twofish algorithm
 ahu algorithm
 newton method
 gradient descent
+knuth's algorithm
 Björklund algorithm
 elgamal algorithm
 shell sort
@@ -18,10 +19,12 @@ bucket sort
 rijndael algorithm (AES)
 pollard's rho algorithm
 Tarjan algorithm
+burnikel ziegler algorithm
 dancing link
 backpropagation
 boids
 graham scan
+karatsuba algorithm
 wave function collapse
 cellular automata
 main lorentz algorithm
