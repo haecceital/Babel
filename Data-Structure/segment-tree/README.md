@@ -38,7 +38,7 @@ $$
 如果太抽象的話可以看以下的例子
 
 
-## 一些例子
+### 一些例子
 
 以下的例子可能無法用我的[segment-tree.cpp](/Data-Structure/segment-tree/segment-tree.cpp)實現，因為我有些地方實作有問題(我沒有實作操作的 merge，而是直接拿資料的 merge 去用)
 
