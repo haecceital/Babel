@@ -25,13 +25,13 @@ $$
 
 如果想要使這個積分收斂，我們可以把 $g = \sin$ 換成 $g = e^{-\epsilon |t|} \sin t, \, \epsilon > 0$，這時積分必定收斂。考慮 $\epsilon = 1$，這時候 $\lim_{t \to \infty} g(t) = 0$（ $-\infty$ 同理）。此時積分結果會是一個有兩個高峰的函數（位於 $\pm\frac{1}{2\pi}$ 附近），而隨著 $\epsilon$ 從正方向慢慢趨近於 0（ $\lim_{\epsilon \to 0^+}$ ），這兩個尖峰會越來越高、越來越窄，周圍的高度則越來越低，直到 $\lim_{\epsilon \to 0^+}$ 時，在 $\pm\frac{1}{2\pi}$ 的值為無窮大，寬度卻是無窮小。過程中，構成這兩個尖峰的每一項，面積都固定為 $\frac{1}{2}$
 
-而這個高度無窮大、寬度無窮小、面積固定的東西，就是狄拉克 $\delta$ 函數（嚴格來說是廣義函數）。可以簡單理解為 $\delta(0) = \infty$，$\delta(r) = 0, \, r \neq 0$ ，且 $\int_{-\infty}^{\infty} \delta(t) \, dt = 1$ 。因此：
+而這個高度無窮大、寬度無窮小、面積固定的東西，就是狄拉克 $\delta$ 函數（嚴格來說是廣義函數）。可以簡單理解為 $\delta(0) = \infty$ ， $\delta(r) = 0, \, r \neq 0$ ，且 $\int_{-\infty}^{\infty} \delta(t) \, dt = 1$ 。因此：
 
 $$
 \lim_{\epsilon \to 0^+} f(\xi) = -\frac{i}{2}\left[\delta\left(\xi - \frac{1}{2\pi}\right) - \delta\left(\xi + \frac{1}{2\pi}\right)\right]
 $$
 
-也就是說，$\sin$ 裡有兩個旋轉頻率（ $e^{it}$ 與 $e^{-it}$ ），變換之後就在這兩個頻率上各留下一個 $\delta$。對一般函數同理，函數裡含有的每個頻率成分，都會在變換結果的對應位置留下一個尖峰，這就是傅立葉變換能找出一個函數由哪些頻率組成的原因
+也就是說， $\sin$ 裡有兩個旋轉頻率（ $e^{it}$ 與 $e^{-it}$ ），變換之後就在這兩個頻率上各留下一個 $\delta$。對一般函數同理，函數裡含有的每個頻率成分，都會在變換結果的對應位置留下一個尖峰，這就是傅立葉變換能找出一個函數由哪些頻率組成的原因
 
 
 ## DFT
@@ -136,7 +136,7 @@ $n^{-1}$ 是模 $p$ 下 $n$ 的模逆元，也就是 $n \cdot n^{-1} \equiv 1 \p
 
 NTT 也可以使用上述的 Cooley-Tukey 算法優化，因為它滿足 $\omega^n \equiv 1 \pmod p \wedge \omega^{\frac{n}{2}} \equiv -1 \pmod p$，後者推導如下
 
-由於 $\omega$ 的定義，$\omega^{\frac{n}{2}}$ 不可能在模 $p$ 下同餘 $1$
+由於 $\omega$ 的定義， $\omega^{\frac{n}{2}}$ 不可能在模 $p$ 下同餘 $1$
 
 $$
 \begin{aligned}
