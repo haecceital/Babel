@@ -18,6 +18,8 @@ intro sort
 bucket sort
 rijndael algorithm (AES)
 pollard's rho algorithm
+GRU
+LSTM    
 Tarjan algorithm
 burnikel ziegler algorithm
 dancing link
@@ -62,7 +64,6 @@ cartesian tree
 splay tree
 cat tree
 virtual tree
-keccak256
 link-cut tree
 treap
 dividing tree
@@ -79,7 +80,6 @@ RSA
 SNN
 elliptic curve cryptography (ECC)
 MD5
-fast fourier transform
 merkle hellman knapsack cryptosystem
 mersenne twister
 cha cha 20
