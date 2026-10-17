@@ -23,9 +23,9 @@ $$
 
 可以看得出來，實數分量會被抵銷，但虛數分量不會，而是會一直疊加，發散至無窮。也可以直接展開確認： $\sin t \cdot e^{it} = \frac{1}{2}\sin 2t + i\sin^2 t$，實部正負震盪而相消，虛部 $\sin^2 t \ge 0$ 則永遠不會抵消
 
-如果想要使這個積分收斂，我們可以把 $g = \sin$ 換成 $g = e^{-\epsilon |t|} \sin t, \, \epsilon > 0$，這時積分必定收斂。考慮 $\epsilon = 1$，這時候 $\lim_{t \to \infty} g(t) = 0$（ $-\infty$ 同理）。此時積分結果會是一個有兩個高峰的函數（位於 $\pm\frac{1}{2\pi}$ 附近），而隨著 $\epsilon$ 從正方向慢慢趨近於 0（ $\lim_{\epsilon \to 0^+}$ ），這兩個尖峰會越來越高、越來越窄，周圍的高度則越來越低，直到 $\lim_{\epsilon \to 0^+}$ 時，在 $\pm\frac{1}{2\pi}$ 的值為無窮大，寬度卻是無窮小。過程中，構成這兩個尖峰的每一項，面積都固定為 $\frac{1}{2}$
+如果想要使這個積分收斂，我們可以把 $g = \sin$ 換成 $g = e^{-\epsilon |t|} \sin t, \ \epsilon > 0$，這時積分必定收斂。考慮 $\epsilon = 1$，這時候 $\lim_{t \to \infty} g(t) = 0$（ $-\infty$ 同理）。此時積分結果會是一個有兩個高峰的函數（位於 $\pm\frac{1}{2\pi}$ 附近），而隨著 $\epsilon$ 從正方向慢慢趨近於 0（ $\lim_{\epsilon \to 0^+}$ ），這兩個尖峰會越來越高、越來越窄，周圍的高度則越來越低，直到 $\lim_{\epsilon \to 0^+}$ 時，在 $\pm\frac{1}{2\pi}$ 的值為無窮大，寬度卻是無窮小。過程中，構成這兩個尖峰的每一項，面積都固定為 $\frac{1}{2}$
 
-而這個高度無窮大、寬度無窮小、面積固定的東西，就是狄拉克 $\delta$ 函數（嚴格來說是廣義函數）。可以簡單理解為 $\delta(0) = \infty$ ， $\delta(r) = 0, \, r \neq 0$ ，且 $\int_{-\infty}^{\infty} \delta(t) \, dt = 1$ 。因此：
+而這個高度無窮大、寬度無窮小、面積固定的東西，就是狄拉克 $\delta$ 函數（嚴格來說是廣義函數）。可以簡單理解為 $\delta(0) = \infty$ ， $\delta(r) = 0, \ r \neq 0$ ，且 $\int_{-\infty}^{\infty} \delta(t) \ dt = 1$ 。因此：
 
 $$
 \lim_{\epsilon \to 0^+} f(\xi) = -\frac{i}{2}\left[\delta\left(\xi - \frac{1}{2\pi}\right) - \delta\left(\xi + \frac{1}{2\pi}\right)\right]
@@ -64,8 +64,10 @@ $$
 提出常數項，並將原來的奇偶項用符號表示（方便後續閱讀）
 
 $$
-X_m = \sum_{k = 0}^{\frac{n}{2}-1} x_{2k} \cdot e^{i\frac{-2\pi}{\frac{n}{2}}mk} + e^{i\frac{-2\pi}{n}m} \cdot \sum_{k = 0}^{\frac{n}{2} - 1} x_{2k + 1} \cdot e^{i\frac{-2\pi}{\frac{n}{2}}mk} \\
-X_m = E_m + e^{i\frac{-2\pi}{n}m} \cdot O_m
+\begin{aligned}
+X_m &= \sum_{k = 0}^{\frac{n}{2}-1} x_{2k} \cdot e^{i\frac{-2\pi}{\frac{n}{2}}mk} + e^{i\frac{-2\pi}{n}m} \cdot \sum_{k = 0}^{\frac{n}{2} - 1} x_{2k + 1} \cdot e^{i\frac{-2\pi}{\frac{n}{2}}mk} \\
+X_m &= E_m + e^{i\frac{-2\pi}{n}m} \cdot O_m
+\end{aligned}
 $$
 
 
@@ -75,7 +77,7 @@ $$
 \begin{aligned}
 E_{m + \frac{n}{2}} &= \sum_{k = 0}^{\frac{n}{2} - 1} x_{2k} \cdot e^{i\frac{-2\pi}{\frac{n}{2}}(m + \frac{n}{2})k} \\
 &= \sum_{k = 0}^{\frac{n}{2} - 1} x_{2k} \cdot (e^{i\frac{-2\pi}{\frac{n}{2}}mk} \cdot e^{i\frac{-2\pi}{\frac{n}{2}}\frac{n}{2}k}) \\
-&= \sum_{k = 0}^{\frac{n}{2} - 1} x_{2k} \cdot (e^{i\frac{-2\pi}{\frac{n}{2}}mk} \cdot e^{-2i\pi k}) \, ,k \in \mathbb{Z} \implies e^{-2i\pi k} =1 \\
+&= \sum_{k = 0}^{\frac{n}{2} - 1} x_{2k} \cdot (e^{i\frac{-2\pi}{\frac{n}{2}}mk} \cdot e^{-2i\pi k}) \ ,k \in \mathbb{Z} \implies e^{-2i\pi k} =1 \\
 &= \sum_{k = 0}^{\frac{n}{2} - 1} x_{2k} \cdot (e^{i\frac{-2\pi}{\frac{n}{2}}mk} \cdot 1) \\
 E_{m + \frac{n}{2}} &= E_m
 \end{aligned}
