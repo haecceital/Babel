@@ -28,8 +28,8 @@
 
 $$
 \begin{aligned}
-& 1. \, h(h(old\_v, v_1, L), v_2, L) = h(old\_v, g(v_1, v_2), L) \\
-& 2. \, h(f(old\_v_1, old\_v_2), v, L_1 + L_2) = f(h(old\_v_1, v, L_1), h(old\_v_2, v, L_2))
+& 1. \ h(h(old\_v, v_1, L), v_2, L) = h(old\_v, g(v_1, v_2), L) \\
+& 2. \ h(f(old\_v_1, old\_v_2), v, L_1 + L_2) = f(h(old\_v_1, v, L_1), h(old\_v_2, v, L_2))
 \end{aligned}
 $$
 
@@ -59,6 +59,6 @@ apply_lazy 則是 $apply\_lazy(old, v, len) = v * len$
 
 
 如果我把操作改成區間加法 <br>
-merge_data 不變 $merge\_data(x, y) = x + y$
+merge_data 不變 $merge\_data(x, y) = x + y$ <br>
 merge_action 會是 $merge\_action(x, y) = x + y$ <br>
 而 apply_lazy 會變成 $apply\_lazy(old\_v, v, len) = old\_v + v * len$
