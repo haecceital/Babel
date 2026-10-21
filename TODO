@@ -1,3 +1,7 @@
+The order of the algorithm below is completely arbitrary
+It doesn't mean anything
+
+
 trie
 serpent algorithm
 twofish algorithm
@@ -15,17 +19,20 @@ tim sort
 bitonic sort
 cycle sort
 intro sort
+continued fractions algorithm
 bucket sort
 rijndael algorithm (AES)
 pollard's rho algorithm
 GRU
-LSTM    
+LSTM
 Tarjan algorithm
+C3 linearization algorithm
 burnikel ziegler algorithm
 dancing link
 backpropagation
 boids
 graham scan
+QFT
 karatsuba algorithm
 wave function collapse
 cellular automata
@@ -35,6 +42,7 @@ argon2
 RNN
 monotone chain algorithm
 MARS (used to be one of the cadidate of AES)
+C4.5 algorithm
 gift wrapping algorithm
 RC6
 A*
@@ -84,5 +92,6 @@ merkle hellman knapsack cryptosystem
 mersenne twister
 cha cha 20
 chudnovsky algorithm
+
 
 fix segment tree
