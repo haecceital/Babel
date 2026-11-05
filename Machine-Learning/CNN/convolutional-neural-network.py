@@ -1,16 +1,16 @@
 import numpy as np
 
-
 size2d = tuple[int, int]
 
-EPS = 1E-8
+EPS = 1e-8
 DECAY_RATE = 0.9
 LR_MAX = 0.01
-LR_MIN = 1E-6
+LR_MIN = 1e-6
 TOTAL_EPOCHS = 100
 
 
 sliding_window_view = np.lib.stride_tricks.sliding_window_view
+
 
 # cosine annealing
 def get_cosine_lr(epoch: int):
@@ -26,7 +26,7 @@ def get_cosine_lr(epoch: int):
     return cur_lr
 
 
-def simple_im2col(image: np.ndarray, kernel_size: size2d, stride = 1) -> np.ndarray:
+def simple_im2col(image: np.ndarray, kernel_size: size2d, stride=1) -> np.ndarray:
     kernel_h, kernel_w = kernel_size
 
     channels, img_h, img_w = image.shape
@@ -38,7 +38,7 @@ def simple_im2col(image: np.ndarray, kernel_size: size2d, stride = 1) -> np.ndar
 
     for y in range(0, img_h - kernel_h + 1, stride):
         for x in range(0, img_w - kernel_w + 1, stride):
-            tmp = image[:, y:y + kernel_h, x:x + kernel_w]
+            tmp = image[:, y : y + kernel_h, x : x + kernel_w]
 
             cols.append(tmp.reshape(-1, 1))
 
@@ -47,14 +47,14 @@ def simple_im2col(image: np.ndarray, kernel_size: size2d, stride = 1) -> np.ndar
     return image_matrix, (out_h, out_w)
 
 
-def im2col(image: np.ndarray, kernel_size: size2d, stride:int = 1) -> np.ndarray:
+def im2col(image: np.ndarray, kernel_size: size2d, stride: int = 1) -> np.ndarray:
     kernel_h, kernel_w = kernel_size
     channels, img_h, img_w = image.shape
 
     out_h = (img_h - kernel_h) // stride + 1
     out_w = (img_w - kernel_w) // stride + 1
 
-    windows = sliding_window_view(image, window_shape = kernel_size, axis = (1, 2))
+    windows = sliding_window_view(image, window_shape=kernel_size, axis=(1, 2))
 
     strided_windows = windows[:, ::stride, ::stride, :, :]
 
@@ -65,7 +65,9 @@ def im2col(image: np.ndarray, kernel_size: size2d, stride:int = 1) -> np.ndarray
     return image_matrix, (out_h, out_w)
 
 
-def simple_col2im(d_data_matrix: np.ndarray, data_shape: tuple, kernel_size: size2d, stride: int = 1):
+def simple_col2im(
+    d_data_matrix: np.ndarray, data_shape: tuple, kernel_size: size2d, stride: int = 1
+):
     d_input = np.zeros(data_shape)
 
     channels, height, width = data_shape
@@ -93,7 +95,9 @@ def simple_col2im(d_data_matrix: np.ndarray, data_shape: tuple, kernel_size: siz
 
 
 class Conv2D:
-    def __init__(self, in_channels: int, out_channels: int, kernel_size: size2d = (3, 3)):
+    def __init__(
+        self, in_channels: int, out_channels: int, kernel_size: size2d = (3, 3)
+    ):
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.kernel_size = kernel_size
@@ -104,15 +108,11 @@ class Conv2D:
         self.cache_d_filters = np.zeros_like(self.filters)
         self.cache_d_biases = np.zeros_like(self.biases)
 
-
     def forward(self, data: np.ndarray) -> np.ndarray:
         filters_matrix = self.filters.reshape(self.out_channels, -1)
         data_matrix, output_size = im2col(data, self.kernel_size, 1)
 
-        self.cache = {
-            "data_matrix": data_matrix,
-            "data_shape": data.shape
-        }
+        self.cache = {"data_matrix": data_matrix, "data_shape": data.shape}
 
         output_matrix = (filters_matrix @ data_matrix) + self.biases.reshape(-1, 1)
 
@@ -120,11 +120,10 @@ class Conv2D:
 
         return output
 
-
     def backward(self, d_out: np.ndarray, learning_rate: float = 0.001) -> np.ndarray:
         d_out_matrix = d_out.reshape(self.out_channels, -1)
 
-        d_biases = np.sum(d_out_matrix, axis = 1)
+        d_biases = np.sum(d_out_matrix, axis=1)
 
         d_filters_matrix = d_out_matrix @ self.cache["data_matrix"].T
         d_filters = d_filters_matrix.reshape(self.filters.shape)
@@ -133,11 +132,17 @@ class Conv2D:
 
         d_data_matrix = filters_matrix.T @ d_out_matrix
 
-        d_input = simple_col2im(d_data_matrix, self.cache["data_shape"], self.kernel_size)
+        d_input = simple_col2im(
+            d_data_matrix, self.cache["data_shape"], self.kernel_size
+        )
 
         # RMSprop algorithm
-        self.cache_d_filters = DECAY_RATE * self.cache_d_filters + (1 - DECAY_RATE) * (d_filters ** 2)
-        self.cache_d_biases = DECAY_RATE * self.cache_d_biases + (1 - DECAY_RATE) * (d_biases ** 2)
+        self.cache_d_filters = DECAY_RATE * self.cache_d_filters + (1 - DECAY_RATE) * (
+            d_filters**2
+        )
+        self.cache_d_biases = DECAY_RATE * self.cache_d_biases + (1 - DECAY_RATE) * (
+            d_biases**2
+        )
 
         lr_filters = learning_rate / (np.sqrt(self.cache_d_filters) + EPS)
         lr_biases = learning_rate / (np.sqrt(self.cache_d_biases) + EPS)
@@ -153,17 +158,15 @@ class LeakyReLU:
         self.alpha = alpha
         self.cache = None
 
-
     def forward(self, data: np.ndarray) -> np.ndarray:
-        self.cache = (data > 0)
+        self.cache = data > 0
 
         output = np.maximum(self.alpha * data, data)
 
         return output
 
-
     def backward(self, d_out: np.ndarray, learning_rate: float = None) -> np.ndarray:
-        d_input = np.array(d_out, copy = True)
+        d_input = np.array(d_out, copy=True)
 
         d_input[~self.cache] *= self.alpha
 
@@ -176,13 +179,12 @@ class MaxPooling2D:
         self.pool_size = pool_size
         self.stride = stride
 
-
     def forward(self, data: np.ndarray) -> np.ndarray:
-        windows = sliding_window_view(data, window_shape = self.pool_size, axis = (1, 2))
+        windows = sliding_window_view(data, window_shape=self.pool_size, axis=(1, 2))
 
-        strided_windows = windows[:, ::self.stride, ::self.stride, :, :]
+        strided_windows = windows[:, :: self.stride, :: self.stride, :, :]
 
-        output = np.max(strided_windows, axis = (-2, -1))
+        output = np.max(strided_windows, axis=(-2, -1))
         self.cache = data
 
         return output
@@ -213,14 +215,12 @@ class Flatten:
     def __init__(self):
         self.cache = None
 
-
     def forward(self, data: np.ndarray) -> np.ndarray:
         self.cache = data.shape
 
         output = data.flatten()
 
         return output
-
 
     def backward(self, d_out: np.ndarray, learning_rate: float = None) -> np.ndarray:
         d_input = d_out.reshape(self.cache)
@@ -239,14 +239,12 @@ class Dense:
         self.cache_d_weights = np.zeros_like(self.weights)
         self.cache_d_biases = np.zeros_like(self.biases)
 
-
     def forward(self, data: np.ndarray) -> np.ndarray:
         self.cache = data
 
         output = (self.weights @ data) + self.biases
 
         return output
-
 
     def backward(self, d_out: np.ndarray, learning_rate: float = 0.001) -> np.ndarray:
         d_weights = np.outer(d_out, self.cache)
@@ -256,8 +254,12 @@ class Dense:
         d_input = self.weights.T @ d_out
 
         # RMSprop algorithm
-        self.cache_d_weights = DECAY_RATE * self.cache_d_weights + (1 - DECAY_RATE) * (d_weights ** 2)
-        self.cache_d_biases = DECAY_RATE * self.cache_d_biases + (1 - DECAY_RATE) * (d_biases ** 2)
+        self.cache_d_weights = DECAY_RATE * self.cache_d_weights + (1 - DECAY_RATE) * (
+            d_weights**2
+        )
+        self.cache_d_biases = DECAY_RATE * self.cache_d_biases + (1 - DECAY_RATE) * (
+            d_biases**2
+        )
 
         lr_weights = learning_rate / (np.sqrt(self.cache_d_weights) + EPS)
         lr_biases = learning_rate / (np.sqrt(self.cache_d_biases) + EPS)
@@ -291,6 +293,7 @@ class SoftmaxCrossEntropy:
         d_out = self.cache_y_pred - self.cache_y_true
 
         return d_out
+
 
 pipeline = []
 

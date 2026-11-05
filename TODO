@@ -32,6 +32,9 @@ dancing link
 backpropagation
 boids
 graham scan
+SVM
+DNN
+DPN (Dual Path Network)
 QFT
 suffix automaton
 karatsuba algorithm
@@ -44,9 +47,13 @@ RNN
 monotone chain algorithm
 MARS (used to be one of the cadidate of AES)
 C4.5 algorithm
+CART
+ID3
 gift wrapping algorithm
 RC6
-A*
+A* algorithm
+pubgrub algorithm
+ziggurat algorithm
 simulated annealing
 garsia wachs algorithm
 tabu search
@@ -85,9 +92,7 @@ artificial bee colony
 heavy-light decomposition
 long-chain decomposition
 preferred-path decomposition
-RSA
 SNN
-elliptic curve cryptography (ECC)
 MD5
 merkle hellman knapsack cryptosystem
 mersenne twister
@@ -96,3 +101,7 @@ chudnovsky algorithm
 
 
 fix segment tree
+implement ECIES on top of ECC (ECDH + KDF + symmetric encryption)
+use Montgomery ladder for ECC scalar multiplication
+add more validation checks for ECC (point on curve, subgroup check, etc)
+implement OAEP padding for RSA
